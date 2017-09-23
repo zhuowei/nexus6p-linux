@@ -402,7 +402,8 @@ static const struct pstore_zbackend backend_lz4 = {
 };
 #endif
 
-static const struct pstore_zbackend *zbackend =
+static const struct pstore_zbackend *zbackend = NULL;
+/*
 #if defined(CONFIG_PSTORE_ZLIB_COMPRESS)
 	&backend_zlib;
 #elif defined(CONFIG_PSTORE_LZO_COMPRESS)
@@ -412,6 +413,7 @@ static const struct pstore_zbackend *zbackend =
 #else
 	NULL;
 #endif
+*/
 
 static int pstore_compress(const void *in, void *out,
 			   size_t inlen, size_t outlen)
