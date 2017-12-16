@@ -21,11 +21,14 @@
 #include <linux/module.h>
 #include <linux/reboot.h>
 #include <linux/pm.h>
+#include <linux/kmsg_dump.h>
 
 static void __iomem *msm_ps_hold;
 static int do_msm_restart(struct notifier_block *nb, unsigned long action,
 			   void *data)
 {
+	kmsg_dump(KMSG_DUMP_OOPS);
+	while(1){}
 	writel(0, msm_ps_hold);
 	mdelay(10000);
 

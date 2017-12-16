@@ -27,6 +27,7 @@
 #include <linux/async.h>
 #include <linux/pm_runtime.h>
 #include <linux/pinctrl/devinfo.h>
+#include <linux/kmsg_dump.h>
 
 #include "base.h"
 #include "power/power.h"
@@ -555,8 +556,10 @@ int driver_probe_device(struct device_driver *drv, struct device *dev)
 	if (!device_is_registered(dev))
 		return -ENODEV;
 
-	pr_debug("bus: '%s': %s: matched device %s with driver %s\n",
+	pr_warn("bus: '%s': %s: matched device %s with driver %s\n",
 		 drv->bus->name, __func__, dev_name(dev), drv->name);
+
+	kmsg_dump(KMSG_DUMP_OOPS);
 
 	pm_runtime_get_suppliers(dev);
 	if (dev->parent)
@@ -570,6 +573,9 @@ int driver_probe_device(struct device_driver *drv, struct device *dev)
 		pm_runtime_put(dev->parent);
 
 	pm_runtime_put_suppliers(dev);
+
+	pr_warn("Done probling %s\n", drv->name);
+
 	return ret;
 }
 

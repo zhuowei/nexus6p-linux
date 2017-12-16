@@ -193,8 +193,23 @@
 		#size-cells = <2>;
 		ranges;
 
+		memory@6300000 {
+			reg = <0x0 0x6300000 0x0 0x700000>;
+			no-map;
+		};
+
 		smem_mem: smem_region@6a00000 {
 			reg = <0x0 0x6a00000 0x0 0x200000>;
+			no-map;
+		};
+
+		memory@6c00000 {
+			reg = <0x0 0x6c00000 0x0 0x400000>;
+			no-map;
+		};
+
+		modem_region@7000000 {
+			reg = <0x0 0x7000000 0x0 0x5a00000>;
 			no-map;
 		};
 	};

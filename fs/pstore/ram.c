@@ -849,7 +849,6 @@ static int ramoops_probe(struct platform_device *pdev)
 	pr_info("attached 0x%lx@0x%llx, ecc: %d/%d\n",
 		cxt->size, (unsigned long long)cxt->phys_addr,
 		cxt->ecc_info.ecc_size, cxt->ecc_info.block_size);
-	kmsg_dump(KMSG_DUMP_PANIC);
 	return 0;
 
 fail_buf:

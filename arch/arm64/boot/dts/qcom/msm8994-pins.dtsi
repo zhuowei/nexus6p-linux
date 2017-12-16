@@ -12,6 +12,7 @@
  */
 
 &msmgpio {
+/*
 	blsp1_uart2_default: blsp1_uart2_default {
 		pinmux {
 			function = "blsp_uart2";
@@ -35,4 +36,5 @@
 			bias-pull-down;
 		};
 	};
+*/
 };
