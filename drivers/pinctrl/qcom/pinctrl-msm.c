@@ -441,6 +441,13 @@ static int msm_gpio_get_direction(struct gpio_chip *chip, unsigned int offset)
 	const struct msm_pingroup *g;
 	u32 val;
 
+	if (offset >= 85 && offset <= 90) {
+		// HACK: Nexus 6P (Huawei Angler VN2) reboots with no warning during boot without this line
+		// I'm guessing there's some TrustZone/Hypervisor changes that reboots during a read
+		pr_warn("skipping offset %i\n", offset);
+		return 0;
+	}
+
 	g = &pctrl->soc->groups[offset];
 
 	val = readl(pctrl->regs + g->ctl_reg);
